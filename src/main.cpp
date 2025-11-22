@@ -5,25 +5,23 @@
 #include "../include/csv_output.h"
 #include "../include/benchmark.h"
 
-
-
 using namespace std;
 
 int main() {
     setlocale(LC_ALL, "Russian");
 
-    // Система:
-    // 4x1 + 0.24x2 - 0.08x3 = 8
-    // 0.09x1 + 3x2 - 0.15x3 = 9
-    // 0.04x1 - 0.08x2 + 4x3 = 20
-
+    // Система 14:
+    // 4x - y + 2z = 11
+    // x + 3y - z = 4
+    // 2x + y + z = 7
     double A[N][N] = {
-        {4.0,   0.24, -0.08},
-        {0.09,  3.0,  -0.15},
-        {0.04, -0.08,  4.0}
+        {4.0, -1.0,  2.0},
+        {1.0,  3.0, -1.0},
+        {2.0,  1.0,  1.0}
     };
 
-    double b[N] = {8.0, 9.0, 20.0};
+    // Вектор правых частей для системы 14
+    double b[N] = {11.0, 4.0, 7.0};
 
     // ---------- 1. Метод Гаусса ----------
     double xGauss[N];
@@ -46,7 +44,7 @@ int main() {
 
     double xJacobi[N];
     double eps = 1e-3;
-    int maxIter = 100;
+    int maxIter = 1000; // чтобы точно успеть сойтись
 
     int iterJacobi = jacobiSolve(A, b, xJacobi, N, eps, maxIter);
 
